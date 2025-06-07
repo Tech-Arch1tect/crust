@@ -10,6 +10,7 @@ export * from './MainMetadataResponseCategories';
 export * from './MainMetadataResponseConfig';
 export * from './MainMetadataResponsePosts';
 export * from './MainMetadataResponsePreviews';
+export * from './MainMetadataResponseSite';
 export * from './MainMetadataResponseTags';
 export * from './MainPost';
 export * from './MainPostPreview';

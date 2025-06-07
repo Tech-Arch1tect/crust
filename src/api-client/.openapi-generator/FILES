@@ -18,6 +18,7 @@ models/MainMetadataResponseCategories.ts
 models/MainMetadataResponseConfig.ts
 models/MainMetadataResponsePosts.ts
 models/MainMetadataResponsePreviews.ts
+models/MainMetadataResponseSite.ts
 models/MainMetadataResponseTags.ts
 models/MainPost.ts
 models/MainPostPreview.ts

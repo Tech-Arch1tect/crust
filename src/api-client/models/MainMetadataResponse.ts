@@ -48,6 +48,13 @@ import {
     MainMetadataResponsePostsToJSON,
     MainMetadataResponsePostsToJSONTyped,
 } from './MainMetadataResponsePosts';
+import type { MainMetadataResponseSite } from './MainMetadataResponseSite';
+import {
+    MainMetadataResponseSiteFromJSON,
+    MainMetadataResponseSiteFromJSONTyped,
+    MainMetadataResponseSiteToJSON,
+    MainMetadataResponseSiteToJSONTyped,
+} from './MainMetadataResponseSite';
 
 /**
  * Unified API metadata including counts, pagination info, and configuration
@@ -81,6 +88,12 @@ export interface MainMetadataResponse {
     previews?: MainMetadataResponsePreviews;
     /**
      * 
+     * @type {MainMetadataResponseSite}
+     * @memberof MainMetadataResponse
+     */
+    site?: MainMetadataResponseSite;
+    /**
+     * 
      * @type {MainMetadataResponseTags}
      * @memberof MainMetadataResponse
      */
@@ -108,6 +121,7 @@ export function MainMetadataResponseFromJSONTyped(json: any, ignoreDiscriminator
         'config': json['config'] == null ? undefined : MainMetadataResponseConfigFromJSON(json['config']),
         'posts': json['posts'] == null ? undefined : MainMetadataResponsePostsFromJSON(json['posts']),
         'previews': json['previews'] == null ? undefined : MainMetadataResponsePreviewsFromJSON(json['previews']),
+        'site': json['site'] == null ? undefined : MainMetadataResponseSiteFromJSON(json['site']),
         'tags': json['tags'] == null ? undefined : MainMetadataResponseTagsFromJSON(json['tags']),
     };
 }
@@ -127,6 +141,7 @@ export function MainMetadataResponseToJSONTyped(value?: MainMetadataResponse | n
         'config': MainMetadataResponseConfigToJSON(value['config']),
         'posts': MainMetadataResponsePostsToJSON(value['posts']),
         'previews': MainMetadataResponsePreviewsToJSON(value['previews']),
+        'site': MainMetadataResponseSiteToJSON(value['site']),
         'tags': MainMetadataResponseTagsToJSON(value['tags']),
     };
 }
