@@ -25,3 +25,14 @@ export function getPostPreviewTags(post: MainPostPreview) {
 	const tags = post?.frontmatter?.tags;
 	return Array.isArray(tags) ? tags.filter(Boolean) : [];
 }
+
+export function getPostPreviewDate(post: MainPostPreview): string {
+	// TODO formate date properly
+	const date = post?.frontmatter?.date;
+	if (!date) return 'Unknown';
+	return date;
+}
+
+export function getPostPreviewCategory(post: MainPostPreview): string {
+	return post?.frontmatter?.category || 'Uncategorised';
+}
