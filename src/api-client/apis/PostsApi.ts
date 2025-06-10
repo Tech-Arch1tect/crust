@@ -16,18 +16,24 @@
 import * as runtime from '../runtime';
 import type {
   MainErrorResponse,
+  MainPost,
   MainPostsResponse,
 } from '../models/index';
 import {
     MainErrorResponseFromJSON,
     MainErrorResponseToJSON,
+    MainPostFromJSON,
+    MainPostToJSON,
     MainPostsResponseFromJSON,
     MainPostsResponseToJSON,
 } from '../models/index';
 
-export interface PostsGetRequest {
-    slug?: string;
+export interface PostsByPageGetRequest {
     page?: number;
+}
+
+export interface PostsBySlugGetRequest {
+    slug: string;
 }
 
 /**
@@ -36,15 +42,11 @@ export interface PostsGetRequest {
 export class PostsApi extends runtime.BaseAPI {
 
     /**
-     * Get all posts or filter by slug/page
-     * Get all posts
+     * Get paginated posts with optional page parameter
+     * Get paginated posts
      */
-    async postsGetRaw(requestParameters: PostsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MainPostsResponse>> {
+    async postsByPageGetRaw(requestParameters: PostsByPageGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MainPostsResponse>> {
         const queryParameters: any = {};
-
-        if (requestParameters['slug'] != null) {
-            queryParameters['slug'] = requestParameters['slug'];
-        }
 
         if (requestParameters['page'] != null) {
             queryParameters['page'] = requestParameters['page'];
@@ -53,7 +55,7 @@ export class PostsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/posts`,
+            path: `/posts/by-page`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -63,11 +65,50 @@ export class PostsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get all posts or filter by slug/page
-     * Get all posts
+     * Get paginated posts with optional page parameter
+     * Get paginated posts
      */
-    async postsGet(requestParameters: PostsGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MainPostsResponse> {
-        const response = await this.postsGetRaw(requestParameters, initOverrides);
+    async postsByPageGet(requestParameters: PostsByPageGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MainPostsResponse> {
+        const response = await this.postsByPageGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get a specific post by its slug
+     * Get post by slug
+     */
+    async postsBySlugGetRaw(requestParameters: PostsBySlugGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MainPost>> {
+        if (requestParameters['slug'] == null) {
+            throw new runtime.RequiredError(
+                'slug',
+                'Required parameter "slug" was null or undefined when calling postsBySlugGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['slug'] != null) {
+            queryParameters['slug'] = requestParameters['slug'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/posts/by-slug`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => MainPostFromJSON(jsonValue));
+    }
+
+    /**
+     * Get a specific post by its slug
+     * Get post by slug
+     */
+    async postsBySlugGet(requestParameters: PostsBySlugGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MainPost> {
+        const response = await this.postsBySlugGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

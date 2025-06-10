@@ -16,18 +16,24 @@
 import * as runtime from '../runtime';
 import type {
   MainErrorResponse,
+  MainPostPreview,
   MainPreviewsResponse,
 } from '../models/index';
 import {
     MainErrorResponseFromJSON,
     MainErrorResponseToJSON,
+    MainPostPreviewFromJSON,
+    MainPostPreviewToJSON,
     MainPreviewsResponseFromJSON,
     MainPreviewsResponseToJSON,
 } from '../models/index';
 
-export interface PreviewsGetRequest {
-    slug?: string;
+export interface PreviewsByPageGetRequest {
     page?: number;
+}
+
+export interface PreviewsBySlugGetRequest {
+    slug: string;
 }
 
 /**
@@ -36,15 +42,11 @@ export interface PreviewsGetRequest {
 export class PreviewsApi extends runtime.BaseAPI {
 
     /**
-     * Get all post previews or filter by slug/page
-     * Get all post previews
+     * Get paginated post previews with optional page parameter
+     * Get paginated previews
      */
-    async previewsGetRaw(requestParameters: PreviewsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MainPreviewsResponse>> {
+    async previewsByPageGetRaw(requestParameters: PreviewsByPageGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MainPreviewsResponse>> {
         const queryParameters: any = {};
-
-        if (requestParameters['slug'] != null) {
-            queryParameters['slug'] = requestParameters['slug'];
-        }
 
         if (requestParameters['page'] != null) {
             queryParameters['page'] = requestParameters['page'];
@@ -53,7 +55,7 @@ export class PreviewsApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
-            path: `/previews`,
+            path: `/previews/by-page`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -63,11 +65,50 @@ export class PreviewsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get all post previews or filter by slug/page
-     * Get all post previews
+     * Get paginated post previews with optional page parameter
+     * Get paginated previews
      */
-    async previewsGet(requestParameters: PreviewsGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MainPreviewsResponse> {
-        const response = await this.previewsGetRaw(requestParameters, initOverrides);
+    async previewsByPageGet(requestParameters: PreviewsByPageGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MainPreviewsResponse> {
+        const response = await this.previewsByPageGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get a specific post preview by its slug
+     * Get preview by slug
+     */
+    async previewsBySlugGetRaw(requestParameters: PreviewsBySlugGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MainPostPreview>> {
+        if (requestParameters['slug'] == null) {
+            throw new runtime.RequiredError(
+                'slug',
+                'Required parameter "slug" was null or undefined when calling previewsBySlugGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['slug'] != null) {
+            queryParameters['slug'] = requestParameters['slug'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/previews/by-slug`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => MainPostPreviewFromJSON(jsonValue));
+    }
+
+    /**
+     * Get a specific post preview by its slug
+     * Get preview by slug
+     */
+    async previewsBySlugGet(requestParameters: PreviewsBySlugGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MainPostPreview> {
+        const response = await this.previewsBySlugGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
