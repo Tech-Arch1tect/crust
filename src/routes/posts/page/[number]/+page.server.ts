@@ -14,7 +14,7 @@ export const load: PageServerLoad = async ({ parent, params }) => {
 	// api is zero indexed
 	const apiPage = userPage - 1;
 
-	const previews = await previewsApi.previewsGet({
+	const previews = await previewsApi.previewsByPageGet({
 		page: apiPage
 	});
 
