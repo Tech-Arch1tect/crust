@@ -1,0 +1,38 @@
+<script lang="ts">
+	import PageHeader from '$lib/components/layout/PageHeader.svelte';
+	import PostCard from '$lib/components/posts/PostCard.svelte';
+	import BackButton from '$lib/components/common/BackButton.svelte';
+	import type { PageData } from './$types';
+
+	let { data }: { data: PageData } = $props();
+
+	const meta = data.meta;
+	const tag = data.tag;
+	const posts = data.postsByTag;
+	const siteName = meta?.site?.name || 'My Blog';
+</script>
+
+<svelte:head>
+	<title>#{tag} - {siteName}</title>
+	<meta name="description" content="Browse posts tagged with #{tag}" />
+</svelte:head>
+
+<div class="mx-auto max-w-4xl">
+	<div class="mt-4 mb-4">
+		<BackButton href="/tags" text="Back to Tags" />
+	</div>
+
+	<PageHeader title={`#${tag}`} description={`Posts tagged with "${tag}"`} colour="blue" />
+
+	{#if posts.length > 0}
+		<div class="space-y-4">
+			{#each posts as post}
+				<PostCard {post} />
+			{/each}
+		</div>
+	{:else}
+		<div class="py-12 text-center text-gray-600">
+			<p>No posts found for this tag.</p>
+		</div>
+	{/if}
+</div>
