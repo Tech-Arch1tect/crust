@@ -1,11 +1,12 @@
 import { tagsApi } from '$lib/api';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import type { MainPostPreview } from '../../../api-client';
 
 export const load: PageServerLoad = async ({ parent, params }) => {
 	const { meta } = await parent();
 
-	let postsByTag;
+	let postsByTag: MainPostPreview[];
 	const tag = params.tag;
 
 	try {

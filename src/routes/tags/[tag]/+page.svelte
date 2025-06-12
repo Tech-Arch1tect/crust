@@ -6,10 +6,10 @@
 
 	let { data }: { data: PageData } = $props();
 
-	const meta = data.meta;
-	const tag = data.tag;
-	const posts = data.postsByTag;
-	const siteName = meta?.site?.name || 'My Blog';
+	const meta = $derived(data.meta);
+	const tag = $derived(data.tag);
+	const posts = $derived(data.postsByTag);
+	const siteName = $derived(meta?.site?.name || 'My Blog');
 </script>
 
 <svelte:head>
