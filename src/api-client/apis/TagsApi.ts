@@ -16,10 +16,13 @@
 import * as runtime from '../runtime';
 import type {
   MainErrorResponse,
+  MainPostPreview,
 } from '../models/index';
 import {
     MainErrorResponseFromJSON,
     MainErrorResponseToJSON,
+    MainPostPreviewFromJSON,
+    MainPostPreviewToJSON,
 } from '../models/index';
 
 export interface TagsGetRequest {
@@ -35,7 +38,7 @@ export class TagsApi extends runtime.BaseAPI {
      * Get all tags or filter posts by specific tag
      * Get all tags
      */
-    async tagsGetRaw(requestParameters: TagsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<string>>> {
+    async tagsGetRaw(requestParameters: TagsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<MainPostPreview>>> {
         const queryParameters: any = {};
 
         if (requestParameters['tag'] != null) {
@@ -51,14 +54,14 @@ export class TagsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MainPostPreviewFromJSON));
     }
 
     /**
      * Get all tags or filter posts by specific tag
      * Get all tags
      */
-    async tagsGet(requestParameters: TagsGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<string>> {
+    async tagsGet(requestParameters: TagsGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<MainPostPreview>> {
         const response = await this.tagsGetRaw(requestParameters, initOverrides);
         return await response.value();
     }

@@ -8,7 +8,6 @@ apis/SearchApi.ts
 apis/TagsApi.ts
 apis/index.ts
 index.ts
-models/MainCategoryDetail.ts
 models/MainCategoryInfo.ts
 models/MainCategoryTreeNode.ts
 models/MainErrorResponse.ts

@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-export * from './MainCategoryDetail';
 export * from './MainCategoryInfo';
 export * from './MainCategoryTreeNode';
 export * from './MainErrorResponse';
