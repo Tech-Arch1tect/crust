@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Card from './Card.svelte';
+	import Card from '../common/Card.svelte';
 	import {
 		getPostPreviewAuthor,
 		getPostPreviewCategory,

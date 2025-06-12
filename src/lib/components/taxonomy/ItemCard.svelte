@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Card from './Card.svelte';
-	import IconAvatar from './IconAvatar.svelte';
+	import Card from '../common/Card.svelte';
+	import IconAvatar from '../common/IconAvatar.svelte';
 	import type { ColourTheme } from '$lib/utils/colours';
 
 	let { name, count, href, colour = 'indigo' as ColourTheme, prefix = '' } = $props();

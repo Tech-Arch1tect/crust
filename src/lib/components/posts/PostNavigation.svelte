@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from './Button.svelte';
+	import Button from '../common/Button.svelte';
 	import { getCategoryName } from '$lib/utils/category';
 
 	let { post, category, tags } = $props();

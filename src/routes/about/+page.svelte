@@ -1,8 +1,8 @@
 <script lang="ts">
-	import PageHeader from '$lib/components/PageHeader.svelte';
-	import Card from '$lib/components/Card.svelte';
-	import StatsCard from '$lib/components/StatsCard.svelte';
-	import Button from '$lib/components/Button.svelte';
+	import PageHeader from '$lib/components/layout/PageHeader.svelte';
+	import Card from '$lib/components/common/Card.svelte';
+	import StatsCard from '$lib/components/common/StatsCard.svelte';
+	import Button from '$lib/components/common/Button.svelte';
 	import { ROUTES } from '$lib/utils/constants';
 	import type { PageData } from './$types';
 

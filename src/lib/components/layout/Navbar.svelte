@@ -1,7 +1,7 @@
 <script lang="ts">
-	import NavDropdown from '$lib/components/NavDropdown.svelte';
-	import MobileMenu from '$lib/components/MobileMenu.svelte';
-	import MenuIcon from '$lib/components/MenuIcon.svelte';
+	import NavDropdown from '$lib/components/layout/NavDropdown.svelte';
+	import MobileMenu from '$lib/components/layout/MobileMenu.svelte';
+	import MenuIcon from '$lib/components/layout/MenuIcon.svelte';
 	import { getTopItems } from '$lib/utils/data';
 	import { NAV_ITEMS } from '$lib/utils/constants';
 

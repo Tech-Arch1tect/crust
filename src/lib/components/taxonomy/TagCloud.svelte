@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Card from './Card.svelte';
+	import Card from '../common/Card.svelte';
 	import { getTagIntensityColour } from '$lib/utils/colours';
 
 	let { tags, maxCount, title = 'Tag Cloud', showCounts = true } = $props();

@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import PostHeader from '$lib/components/PostHeader.svelte';
-	import PostMeta from '$lib/components/PostMeta.svelte';
-	import TagList from '$lib/components/TagList.svelte';
-	import BackButton from '$lib/components/BackButton.svelte';
-	import PostContent from '$lib/components/PostContent.svelte';
-	import PostNavigation from '$lib/components/PostNavigation.svelte';
+	import PostHeader from '$lib/components/posts/PostHeader.svelte';
+	import PostMeta from '$lib/components/posts/PostMeta.svelte';
+	import TagList from '$lib/components/taxonomy/TagList.svelte';
+	import BackButton from '$lib/components/common/BackButton.svelte';
+	import PostContent from '$lib/components/posts/PostContent.svelte';
+	import PostNavigation from '$lib/components/posts/PostNavigation.svelte';
 
 	let { data }: { data: PageData } = $props();
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import StatsCard from '$lib/components/StatsCard.svelte';
-	import QuickNav from '$lib/components/QuickNav.svelte';
+	import StatsCard from '$lib/components/common/StatsCard.svelte';
+	import QuickNav from '$lib/components/layout/QuickNav.svelte';
 	import { ROUTES } from '$lib/utils/constants';
 	import type { PageData } from './$types';
 	import {

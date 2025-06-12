@@ -1,7 +1,7 @@
 <script lang="ts">
-	import PageHeader from '$lib/components/PageHeader.svelte';
-	import ItemCard from '$lib/components/ItemCard.svelte';
-	import Card from '$lib/components/Card.svelte';
+	import PageHeader from '$lib/components/layout/PageHeader.svelte';
+	import ItemCard from '$lib/components/taxonomy/ItemCard.svelte';
+	import Card from '$lib/components/common/Card.svelte';
 	import { getSortedItems } from '$lib/utils/data';
 	import type { PageData } from './$types';
 

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { PageData } from './$types';
-	import PageHeader from '$lib/components/PageHeader.svelte';
-	import PostCard from '$lib/components/PostCard.svelte';
-	import Pagination from '$lib/components/Pagination.svelte';
-	import Card from '$lib/components/Card.svelte';
+	import PageHeader from '$lib/components/layout/PageHeader.svelte';
+	import PostCard from '$lib/components/posts/PostCard.svelte';
+	import Pagination from '$lib/components/posts/Pagination.svelte';
+	import Card from '$lib/components/common/Card.svelte';
 
 	let { data }: { data: PageData } = $props();
 

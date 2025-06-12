@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { marked } from 'marked';
-	import Card from './Card.svelte';
+	import Card from '../common/Card.svelte';
 
 	let { markdown } = $props();
 
