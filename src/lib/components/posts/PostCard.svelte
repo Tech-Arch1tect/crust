@@ -11,24 +11,25 @@
 		getPostPreviewTitle
 	} from '$lib/utils/previews';
 	import { getCategoryName } from '$lib/utils/category';
+	import type { MainPostPreview } from '../../../api-client';
 
 	let {
 		post,
 		showExcerpt = true
 	}: {
-		post: any;
+		post: MainPostPreview;
 		showExcerpt?: boolean;
 	} = $props();
 
-	const postSlug = getPostPreviewSlug(post);
-	const postTitle = getPostPreviewTitle(post);
-	const postAuthor = getPostPreviewAuthor(post);
-	const postDate = getPostPreviewDate(post);
-	const postExcerpt = getPostPreviewExcerpt(post);
-	const postCategory = getPostPreviewCategory(post);
-	const postTags = getPostPreviewTags(post);
-	const readingTime = getPostPreviewReadingTime(post);
-	const categoryName = getCategoryName(post?.frontmatter?.category) || postCategory;
+	const postSlug = $derived(getPostPreviewSlug(post));
+	const postTitle = $derived(getPostPreviewTitle(post));
+	const postAuthor = $derived(getPostPreviewAuthor(post));
+	const postDate = $derived(getPostPreviewDate(post));
+	const postExcerpt = $derived(getPostPreviewExcerpt(post));
+	const postCategory = $derived(getPostPreviewCategory(post));
+	const postTags = $derived(getPostPreviewTags(post));
+	const readingTime = $derived(getPostPreviewReadingTime(post));
+	const categoryName = $derived(getCategoryName(post?.frontmatter?.category) || postCategory);
 </script>
 
 <Card variant="compact" class="!p-5">
