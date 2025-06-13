@@ -16,12 +16,8 @@
 	</Button>
 
 	<div class="flex gap-4">
-		{#if categoryName !== 'Uncategorised'}
-			<Button
-				href="/categories/{encodeURIComponent(post?.frontmatter?.category || '')}"
-				variant="outline"
-				size="sm"
-			>
+		{#if category && categoryName !== 'Uncategorised'}
+			<Button href="/categories/{encodeURIComponent(category)}" variant="outline" size="sm">
 				Browse {categoryName}
 			</Button>
 		{/if}
