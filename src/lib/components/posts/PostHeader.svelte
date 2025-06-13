@@ -8,11 +8,14 @@
 
 <header class="mb-12 text-center">
 	<div class="mb-6">
-		<span
-			class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-800"
-		>
-			{categoryName}
-		</span>
+		{#if category}
+			<a
+				href="/categories/{encodeURIComponent(category)}"
+				class="inline-flex items-center rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-800 transition-colors duration-200 hover:bg-indigo-200 hover:text-indigo-900"
+			>
+				{categoryName}
+			</a>
+		{/if}
 	</div>
 
 	<h1 class="mb-6 text-4xl leading-tight font-bold text-gray-900 md:text-5xl">
