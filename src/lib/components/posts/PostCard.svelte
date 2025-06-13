@@ -35,11 +35,14 @@
 <Card variant="compact" class="!p-5">
 	<div class="mb-3 flex items-center justify-between">
 		<div class="flex items-center gap-2">
-			<span
-				class="inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-1 text-xs font-medium text-indigo-800"
-			>
-				{categoryName}
-			</span>
+			{#if post?.frontmatter?.category}
+				<a
+					href="/categories/{encodeURIComponent(post?.frontmatter?.category || postCategory)}"
+					class="inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-1 text-xs font-medium text-indigo-800 transition-colors duration-200 hover:bg-indigo-200 hover:text-indigo-900"
+				>
+					{categoryName}
+				</a>
+			{/if}
 			<span class="text-xs text-gray-500">{readingTime}</span>
 		</div>
 		{#if postDate}
@@ -70,11 +73,12 @@
 	{#if postTags.length > 0}
 		<div class="mb-3 flex flex-wrap gap-1">
 			{#each postTags as tag}
-				<span
-					class="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800"
+				<a
+					href="/tags/{encodeURIComponent(tag)}"
+					class="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-900"
 				>
 					#{tag}
-				</span>
+				</a>
 			{/each}
 		</div>
 	{:else}
