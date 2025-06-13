@@ -8,8 +8,10 @@
 	let { data }: { data: PageData } = $props();
 
 	const meta = data.meta;
-	const allCategories = getSortedItems(meta?.categories?.stats);
-	const categoriesCount = meta?.categories?.total || 0;
+	const allCategories = getSortedItems(meta?.categories?.stats).filter(
+		(category) => category.count > 0
+	);
+	const categoriesCount = allCategories.length;
 	const postsCount = meta?.posts?.total || 0;
 </script>
 
