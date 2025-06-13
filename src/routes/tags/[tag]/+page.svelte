@@ -19,7 +19,7 @@
 
 <div class="mx-auto max-w-4xl">
 	<div class="mt-4 mb-4">
-		<BackButton href="/tags" text="Back to Tags" />
+		<BackButton fallbackHref="/tags" text="Back" />
 	</div>
 
 	<PageHeader title={`#${tag}`} description={`Posts tagged with "${tag}"`} colour="blue" />

@@ -19,7 +19,7 @@
 
 <div class="mx-auto max-w-4xl">
 	<div class="mt-4 mb-4">
-		<BackButton href="/categories" text="Back to Categories" />
+		<BackButton fallbackHref="/categories" text="Back" />
 	</div>
 
 	<PageHeader title={`${cat}`} description={`Posts in "${cat}"`} colour="blue" />

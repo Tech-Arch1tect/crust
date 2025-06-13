@@ -30,7 +30,7 @@
 
 <div class="mx-auto max-w-4xl">
 	<div class="mt-4 mb-4">
-		<BackButton href="/posts" text="Back to Posts" />
+		<BackButton fallbackHref="/posts" text="Back" />
 	</div>
 
 	<PostHeader {title} {category} />
