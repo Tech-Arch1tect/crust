@@ -29,21 +29,21 @@
 </svelte:head>
 
 <div class="mx-auto max-w-4xl">
-	<div class="mt-4 mb-4">
-		<BackButton fallbackHref="/posts" text="Back" />
+	<div class="relative">
+		<BackButton fallbackHref="/posts" text="Back" position="absolute" />
+
+		<PostHeader {title} {category} />
+
+		<PostMeta {author} {date} {readingTime} />
+
+		{#if tags.length > 0}
+			<div class="mb-12 flex justify-center">
+				<TagList {tags} />
+			</div>
+		{/if}
+
+		<PostContent {markdown} />
+
+		<PostNavigation {post} {category} {tags} />
 	</div>
-
-	<PostHeader {title} {category} />
-
-	<PostMeta {author} {date} {readingTime} />
-
-	{#if tags.length > 0}
-		<div class="mb-12 flex justify-center">
-			<TagList {tags} />
-		</div>
-	{/if}
-
-	<PostContent {markdown} />
-
-	<PostNavigation {post} {category} {tags} />
 </div>

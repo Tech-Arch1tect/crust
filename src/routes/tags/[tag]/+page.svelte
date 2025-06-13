@@ -18,21 +18,21 @@
 </svelte:head>
 
 <div class="mx-auto max-w-4xl">
-	<div class="mt-4 mb-4">
-		<BackButton fallbackHref="/tags" text="Back" />
+	<div class="relative">
+		<BackButton fallbackHref="/tags" text="Back" position="absolute" />
+
+		<PageHeader title={`#${tag}`} description={`Posts tagged with "${tag}"`} colour="blue" />
+
+		{#if posts.length > 0}
+			<div class="space-y-4">
+				{#each posts as post}
+					<PostCard {post} />
+				{/each}
+			</div>
+		{:else}
+			<div class="py-12 text-center text-gray-600">
+				<p>No posts found for this tag.</p>
+			</div>
+		{/if}
 	</div>
-
-	<PageHeader title={`#${tag}`} description={`Posts tagged with "${tag}"`} colour="blue" />
-
-	{#if posts.length > 0}
-		<div class="space-y-4">
-			{#each posts as post}
-				<PostCard {post} />
-			{/each}
-		</div>
-	{:else}
-		<div class="py-12 text-center text-gray-600">
-			<p>No posts found for this tag.</p>
-		</div>
-	{/if}
 </div>
