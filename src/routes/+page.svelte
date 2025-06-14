@@ -4,6 +4,7 @@
 	import { ROUTES } from '$lib/utils/constants';
 	import type { PageData } from './$types';
 	import PostCard from '$lib/components/posts/PostCard.svelte';
+	import { getSortedItems } from '$lib/utils/data';
 
 	let { data }: { data: PageData } = $props();
 
@@ -12,6 +13,9 @@
 	const siteName = meta?.site?.name || 'My Blog';
 	const tagline = meta?.site?.tagline || 'Welcome to My Blog';
 	const description = meta?.site?.description || 'Discover amazing content and insights';
+	const allCategories = getSortedItems(meta?.categories?.stats).filter(
+		(category) => category.count > 0
+	);
 </script>
 
 <svelte:head>
@@ -72,7 +76,7 @@
 
 	<div class="mb-16 grid grid-cols-1 gap-6 md:grid-cols-3">
 		<StatsCard value={meta?.posts?.total || 0} label="Published Posts" colour="blue" />
-		<StatsCard value={meta?.categories?.total || 0} label="Categories" colour="emerald" />
+		<StatsCard value={allCategories.length} label="Categories" colour="emerald" />
 		<StatsCard value={meta?.tags?.total || 0} label="Tags" colour="purple" />
 	</div>
 
