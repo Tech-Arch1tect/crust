@@ -32,9 +32,9 @@
 	<div class="relative">
 		<BackButton fallbackHref="/posts" text="Back" position="absolute" />
 
-		<PostHeader {title} {category} />
+		<PostHeader {title} />
 
-		<PostMeta {author} {date} {readingTime} />
+		<PostMeta {author} {date} {readingTime} {category} />
 
 		{#if tags.length > 0}
 			<div class="mb-12 flex justify-center">
