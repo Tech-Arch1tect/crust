@@ -3,7 +3,6 @@
 	import PostHeader from '$lib/components/posts/PostHeader.svelte';
 	import PostMeta from '$lib/components/posts/PostMeta.svelte';
 	import TagList from '$lib/components/taxonomy/TagList.svelte';
-	import BackButton from '$lib/components/common/BackButton.svelte';
 	import PostContent from '$lib/components/posts/PostContent.svelte';
 	import PostNavigation from '$lib/components/posts/PostNavigation.svelte';
 
@@ -30,8 +29,6 @@
 
 <div class="mx-auto max-w-4xl">
 	<div class="relative">
-		<BackButton fallbackHref="/posts" text="Back" position="absolute" />
-
 		<PostHeader {title} />
 
 		<PostMeta {author} {date} {readingTime} {category} />
