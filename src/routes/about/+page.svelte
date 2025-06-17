@@ -5,6 +5,7 @@
 	import Button from '$lib/components/common/Button.svelte';
 	import { ROUTES } from '$lib/utils/constants';
 	import type { PageData } from './$types';
+	import { getSortedItems } from '$lib/utils/data';
 
 	let { data }: { data: PageData } = $props();
 
@@ -13,7 +14,9 @@
 	const tagline = meta?.site?.tagline || 'About This Blog';
 	const description = meta?.site?.description || 'A modern blog built with SvelteKit';
 	const postsCount = meta?.posts?.total || 0;
-	const categoriesCount = meta?.categories?.total || 0;
+	const allCategories = getSortedItems(meta?.categories?.stats).filter(
+		(category) => category.count > 0
+	);
 	const tagsCount = meta?.tags?.total || 0;
 </script>
 
@@ -37,7 +40,7 @@
 			<h3 class="mb-6 text-2xl font-semibold text-gray-900">Blog Statistics</h3>
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 				<StatsCard value={postsCount} label="Total Posts" colour="blue" />
-				<StatsCard value={categoriesCount} label="Categories" colour="emerald" />
+				<StatsCard value={allCategories.length} label="Categories" colour="emerald" />
 				<StatsCard value={tagsCount} label="Tags" colour="purple" />
 			</div>
 		</div>
