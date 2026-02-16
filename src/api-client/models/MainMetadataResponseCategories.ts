@@ -21,6 +21,12 @@ import { mapValues } from '../runtime';
 export interface MainMetadataResponseCategories {
     /**
      * 
+     * @type {number}
+     * @memberof MainMetadataResponseCategories
+     */
+    perPage?: number;
+    /**
+     * 
      * @type {{ [key: string]: number; }}
      * @memberof MainMetadataResponseCategories
      */
@@ -31,6 +37,12 @@ export interface MainMetadataResponseCategories {
      * @memberof MainMetadataResponseCategories
      */
     total?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof MainMetadataResponseCategories
+     */
+    totalPages?: number;
 }
 
 /**
@@ -50,8 +62,10 @@ export function MainMetadataResponseCategoriesFromJSONTyped(json: any, ignoreDis
     }
     return {
         
+        'perPage': json['perPage'] == null ? undefined : json['perPage'],
         'stats': json['stats'] == null ? undefined : json['stats'],
         'total': json['total'] == null ? undefined : json['total'],
+        'totalPages': json['totalPages'] == null ? undefined : json['totalPages'],
     };
 }
 
@@ -66,8 +80,10 @@ export function MainMetadataResponseCategoriesToJSONTyped(value?: MainMetadataRe
 
     return {
         
+        'perPage': value['perPage'],
         'stats': value['stats'],
         'total': value['total'],
+        'totalPages': value['totalPages'],
     };
 }
 

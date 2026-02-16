@@ -15,18 +15,19 @@
 
 import * as runtime from '../runtime';
 import type {
+  CategoriesGet200Response,
   MainErrorResponse,
-  MainPostPreview,
 } from '../models/index';
 import {
+    CategoriesGet200ResponseFromJSON,
+    CategoriesGet200ResponseToJSON,
     MainErrorResponseFromJSON,
     MainErrorResponseToJSON,
-    MainPostPreviewFromJSON,
-    MainPostPreviewToJSON,
 } from '../models/index';
 
 export interface TagsGetRequest {
-    tag?: string;
+    tag: string;
+    page?: number;
 }
 
 /**
@@ -35,33 +36,47 @@ export interface TagsGetRequest {
 export class TagsApi extends runtime.BaseAPI {
 
     /**
-     * Get all tags or filter posts by specific tag
-     * Get all tags
+     * Get paginated post previews for a specific tag
+     * Get posts by tag
      */
-    async tagsGetRaw(requestParameters: TagsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<MainPostPreview>>> {
+    async tagsGetRaw(requestParameters: TagsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CategoriesGet200Response>> {
+        if (requestParameters['tag'] == null) {
+            throw new runtime.RequiredError(
+                'tag',
+                'Required parameter "tag" was null or undefined when calling tagsGet().'
+            );
+        }
+
         const queryParameters: any = {};
 
         if (requestParameters['tag'] != null) {
             queryParameters['tag'] = requestParameters['tag'];
         }
 
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/tags`;
+
         const response = await this.request({
-            path: `/tags`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MainPostPreviewFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CategoriesGet200ResponseFromJSON(jsonValue));
     }
 
     /**
-     * Get all tags or filter posts by specific tag
-     * Get all tags
+     * Get paginated post previews for a specific tag
+     * Get posts by tag
      */
-    async tagsGet(requestParameters: TagsGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<MainPostPreview>> {
+    async tagsGet(requestParameters: TagsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CategoriesGet200Response> {
         const response = await this.tagsGetRaw(requestParameters, initOverrides);
         return await response.value();
     }

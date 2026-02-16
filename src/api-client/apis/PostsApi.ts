@@ -16,16 +16,16 @@
 import * as runtime from '../runtime';
 import type {
   MainErrorResponse,
-  MainPost,
-  MainPostsResponse,
+  PostsByPageGet200Response,
+  PostsBySlugGet200Response,
 } from '../models/index';
 import {
     MainErrorResponseFromJSON,
     MainErrorResponseToJSON,
-    MainPostFromJSON,
-    MainPostToJSON,
-    MainPostsResponseFromJSON,
-    MainPostsResponseToJSON,
+    PostsByPageGet200ResponseFromJSON,
+    PostsByPageGet200ResponseToJSON,
+    PostsBySlugGet200ResponseFromJSON,
+    PostsBySlugGet200ResponseToJSON,
 } from '../models/index';
 
 export interface PostsByPageGetRequest {
@@ -45,7 +45,7 @@ export class PostsApi extends runtime.BaseAPI {
      * Get paginated posts with optional page parameter
      * Get paginated posts
      */
-    async postsByPageGetRaw(requestParameters: PostsByPageGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MainPostsResponse>> {
+    async postsByPageGetRaw(requestParameters: PostsByPageGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PostsByPageGet200Response>> {
         const queryParameters: any = {};
 
         if (requestParameters['page'] != null) {
@@ -54,21 +54,24 @@ export class PostsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/posts/by-page`;
+
         const response = await this.request({
-            path: `/posts/by-page`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => MainPostsResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => PostsByPageGet200ResponseFromJSON(jsonValue));
     }
 
     /**
      * Get paginated posts with optional page parameter
      * Get paginated posts
      */
-    async postsByPageGet(requestParameters: PostsByPageGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MainPostsResponse> {
+    async postsByPageGet(requestParameters: PostsByPageGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostsByPageGet200Response> {
         const response = await this.postsByPageGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -77,7 +80,7 @@ export class PostsApi extends runtime.BaseAPI {
      * Get a specific post by its slug
      * Get post by slug
      */
-    async postsBySlugGetRaw(requestParameters: PostsBySlugGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MainPost>> {
+    async postsBySlugGetRaw(requestParameters: PostsBySlugGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PostsBySlugGet200Response>> {
         if (requestParameters['slug'] == null) {
             throw new runtime.RequiredError(
                 'slug',
@@ -93,21 +96,24 @@ export class PostsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/posts/by-slug`;
+
         const response = await this.request({
-            path: `/posts/by-slug`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => MainPostFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => PostsBySlugGet200ResponseFromJSON(jsonValue));
     }
 
     /**
      * Get a specific post by its slug
      * Get post by slug
      */
-    async postsBySlugGet(requestParameters: PostsBySlugGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MainPost> {
+    async postsBySlugGet(requestParameters: PostsBySlugGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PostsBySlugGet200Response> {
         const response = await this.postsBySlugGetRaw(requestParameters, initOverrides);
         return await response.value();
     }

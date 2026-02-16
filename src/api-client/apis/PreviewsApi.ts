@@ -15,17 +15,17 @@
 
 import * as runtime from '../runtime';
 import type {
+  CategoriesGet200Response,
   MainErrorResponse,
-  MainPostPreview,
-  MainPreviewsResponse,
+  PreviewsBySlugGet200Response,
 } from '../models/index';
 import {
+    CategoriesGet200ResponseFromJSON,
+    CategoriesGet200ResponseToJSON,
     MainErrorResponseFromJSON,
     MainErrorResponseToJSON,
-    MainPostPreviewFromJSON,
-    MainPostPreviewToJSON,
-    MainPreviewsResponseFromJSON,
-    MainPreviewsResponseToJSON,
+    PreviewsBySlugGet200ResponseFromJSON,
+    PreviewsBySlugGet200ResponseToJSON,
 } from '../models/index';
 
 export interface PreviewsByPageGetRequest {
@@ -45,7 +45,7 @@ export class PreviewsApi extends runtime.BaseAPI {
      * Get paginated post previews with optional page parameter
      * Get paginated previews
      */
-    async previewsByPageGetRaw(requestParameters: PreviewsByPageGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MainPreviewsResponse>> {
+    async previewsByPageGetRaw(requestParameters: PreviewsByPageGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CategoriesGet200Response>> {
         const queryParameters: any = {};
 
         if (requestParameters['page'] != null) {
@@ -54,21 +54,24 @@ export class PreviewsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/previews/by-page`;
+
         const response = await this.request({
-            path: `/previews/by-page`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => MainPreviewsResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CategoriesGet200ResponseFromJSON(jsonValue));
     }
 
     /**
      * Get paginated post previews with optional page parameter
      * Get paginated previews
      */
-    async previewsByPageGet(requestParameters: PreviewsByPageGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MainPreviewsResponse> {
+    async previewsByPageGet(requestParameters: PreviewsByPageGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CategoriesGet200Response> {
         const response = await this.previewsByPageGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -77,7 +80,7 @@ export class PreviewsApi extends runtime.BaseAPI {
      * Get a specific post preview by its slug
      * Get preview by slug
      */
-    async previewsBySlugGetRaw(requestParameters: PreviewsBySlugGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MainPostPreview>> {
+    async previewsBySlugGetRaw(requestParameters: PreviewsBySlugGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PreviewsBySlugGet200Response>> {
         if (requestParameters['slug'] == null) {
             throw new runtime.RequiredError(
                 'slug',
@@ -93,21 +96,24 @@ export class PreviewsApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/previews/by-slug`;
+
         const response = await this.request({
-            path: `/previews/by-slug`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => MainPostPreviewFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => PreviewsBySlugGet200ResponseFromJSON(jsonValue));
     }
 
     /**
      * Get a specific post preview by its slug
      * Get preview by slug
      */
-    async previewsBySlugGet(requestParameters: PreviewsBySlugGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MainPostPreview> {
+    async previewsBySlugGet(requestParameters: PreviewsBySlugGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PreviewsBySlugGet200Response> {
         const response = await this.previewsBySlugGetRaw(requestParameters, initOverrides);
         return await response.value();
     }

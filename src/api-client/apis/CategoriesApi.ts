@@ -15,21 +15,22 @@
 
 import * as runtime from '../runtime';
 import type {
-  MainCategoryTreeNode,
+  CategoriesGet200Response,
+  CategoriesTreeJsonGet200Response,
   MainErrorResponse,
-  MainPostPreview,
 } from '../models/index';
 import {
-    MainCategoryTreeNodeFromJSON,
-    MainCategoryTreeNodeToJSON,
+    CategoriesGet200ResponseFromJSON,
+    CategoriesGet200ResponseToJSON,
+    CategoriesTreeJsonGet200ResponseFromJSON,
+    CategoriesTreeJsonGet200ResponseToJSON,
     MainErrorResponseFromJSON,
     MainErrorResponseToJSON,
-    MainPostPreviewFromJSON,
-    MainPostPreviewToJSON,
 } from '../models/index';
 
 export interface CategoriesGetRequest {
-    category?: string;
+    category: string;
+    page?: number;
 }
 
 /**
@@ -38,33 +39,47 @@ export interface CategoriesGetRequest {
 export class CategoriesApi extends runtime.BaseAPI {
 
     /**
-     * Get all categories or filter by specific category
-     * Get all categories
+     * Get paginated post previews for a specific category
+     * Get posts by category
      */
-    async categoriesGetRaw(requestParameters: CategoriesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<MainPostPreview>>> {
+    async categoriesGetRaw(requestParameters: CategoriesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CategoriesGet200Response>> {
+        if (requestParameters['category'] == null) {
+            throw new runtime.RequiredError(
+                'category',
+                'Required parameter "category" was null or undefined when calling categoriesGet().'
+            );
+        }
+
         const queryParameters: any = {};
 
         if (requestParameters['category'] != null) {
             queryParameters['category'] = requestParameters['category'];
         }
 
+        if (requestParameters['page'] != null) {
+            queryParameters['page'] = requestParameters['page'];
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/categories`;
+
         const response = await this.request({
-            path: `/categories`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MainPostPreviewFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CategoriesGet200ResponseFromJSON(jsonValue));
     }
 
     /**
-     * Get all categories or filter by specific category
-     * Get all categories
+     * Get paginated post previews for a specific category
+     * Get posts by category
      */
-    async categoriesGet(requestParameters: CategoriesGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<MainPostPreview>> {
+    async categoriesGet(requestParameters: CategoriesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CategoriesGet200Response> {
         const response = await this.categoriesGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -73,26 +88,29 @@ export class CategoriesApi extends runtime.BaseAPI {
      * Get hierarchical category tree structure
      * Get category tree
      */
-    async categoriesTreeJsonGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<MainCategoryTreeNode>>> {
+    async categoriesTreeJsonGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CategoriesTreeJsonGet200Response>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/categories/tree.json`;
+
         const response = await this.request({
-            path: `/categories/tree.json`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MainCategoryTreeNodeFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CategoriesTreeJsonGet200ResponseFromJSON(jsonValue));
     }
 
     /**
      * Get hierarchical category tree structure
      * Get category tree
      */
-    async categoriesTreeJsonGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<MainCategoryTreeNode>> {
+    async categoriesTreeJsonGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CategoriesTreeJsonGet200Response> {
         const response = await this.categoriesTreeJsonGetRaw(initOverrides);
         return await response.value();
     }

@@ -13,82 +13,68 @@
  */
 
 import { mapValues } from '../runtime';
-import type { MainPost } from './MainPost';
-import {
-    MainPostFromJSON,
-    MainPostFromJSONTyped,
-    MainPostToJSON,
-    MainPostToJSONTyped,
-} from './MainPost';
-
 /**
- * Paginated response containing posts and pagination metadata
+ * Pagination information for responses
  * @export
- * @interface MainPostsResponse
+ * @interface MainPaginationInfo
  */
-export interface MainPostsResponse {
+export interface MainPaginationInfo {
     /**
      * 
      * @type {boolean}
-     * @memberof MainPostsResponse
+     * @memberof MainPaginationInfo
      */
     hasNext?: boolean;
     /**
      * 
      * @type {boolean}
-     * @memberof MainPostsResponse
+     * @memberof MainPaginationInfo
      */
     hasPrevious?: boolean;
     /**
      * 
      * @type {number}
-     * @memberof MainPostsResponse
+     * @memberof MainPaginationInfo
      */
     nextPage?: number;
     /**
      * 
      * @type {number}
-     * @memberof MainPostsResponse
+     * @memberof MainPaginationInfo
      */
     page?: number;
     /**
      * 
-     * @type {Array<MainPost>}
-     * @memberof MainPostsResponse
-     */
-    posts?: Array<MainPost>;
-    /**
-     * 
      * @type {number}
-     * @memberof MainPostsResponse
+     * @memberof MainPaginationInfo
      */
     prevPage?: number;
     /**
      * 
      * @type {number}
-     * @memberof MainPostsResponse
+     * @memberof MainPaginationInfo
      */
     totalItems?: number;
     /**
      * 
      * @type {number}
-     * @memberof MainPostsResponse
+     * @memberof MainPaginationInfo
      */
     totalPages?: number;
 }
 
 /**
- * Check if a given object implements the MainPostsResponse interface.
+ * Check if a given object implements the MainPaginationInfo interface.
  */
-export function instanceOfMainPostsResponse(value: object): value is MainPostsResponse {
+export function instanceOfMainPaginationInfo(value: object): value is MainPaginationInfo {
     return true;
 }
 
-export function MainPostsResponseFromJSON(json: any): MainPostsResponse {
-    return MainPostsResponseFromJSONTyped(json, false);
+export function MainPaginationInfoFromJSON(json: any): MainPaginationInfo {
+    return MainPaginationInfoFromJSONTyped(json, false);
 }
 
-export function MainPostsResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): MainPostsResponse {
+export function MainPaginationInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): MainPaginationInfo {
     if (json == null) {
         return json;
     }
@@ -98,18 +84,17 @@ export function MainPostsResponseFromJSONTyped(json: any, ignoreDiscriminator: b
         'hasPrevious': json['hasPrevious'] == null ? undefined : json['hasPrevious'],
         'nextPage': json['nextPage'] == null ? undefined : json['nextPage'],
         'page': json['page'] == null ? undefined : json['page'],
-        'posts': json['posts'] == null ? undefined : ((json['posts'] as Array<any>).map(MainPostFromJSON)),
         'prevPage': json['prevPage'] == null ? undefined : json['prevPage'],
         'totalItems': json['totalItems'] == null ? undefined : json['totalItems'],
         'totalPages': json['totalPages'] == null ? undefined : json['totalPages'],
     };
 }
 
-export function MainPostsResponseToJSON(json: any): MainPostsResponse {
-    return MainPostsResponseToJSONTyped(json, false);
+export function MainPaginationInfoToJSON(json: any): MainPaginationInfo {
+    return MainPaginationInfoToJSONTyped(json, false);
 }
 
-export function MainPostsResponseToJSONTyped(value?: MainPostsResponse | null, ignoreDiscriminator: boolean = false): any {
+export function MainPaginationInfoToJSONTyped(value?: MainPaginationInfo | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
@@ -120,7 +105,6 @@ export function MainPostsResponseToJSONTyped(value?: MainPostsResponse | null, i
         'hasPrevious': value['hasPrevious'],
         'nextPage': value['nextPage'],
         'page': value['page'],
-        'posts': value['posts'] == null ? undefined : ((value['posts'] as Array<any>).map(MainPostToJSON)),
         'prevPage': value['prevPage'],
         'totalItems': value['totalItems'],
         'totalPages': value['totalPages'],

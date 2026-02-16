@@ -16,17 +16,17 @@
 import * as runtime from '../runtime';
 import type {
   MainErrorResponse,
-  MainRelatedPost,
+  RelatedGet200Response,
 } from '../models/index';
 import {
     MainErrorResponseFromJSON,
     MainErrorResponseToJSON,
-    MainRelatedPostFromJSON,
-    MainRelatedPostToJSON,
+    RelatedGet200ResponseFromJSON,
+    RelatedGet200ResponseToJSON,
 } from '../models/index';
 
 export interface RelatedGetRequest {
-    slug?: string;
+    slug: string;
 }
 
 /**
@@ -35,10 +35,17 @@ export interface RelatedGetRequest {
 export class RelatedApi extends runtime.BaseAPI {
 
     /**
-     * Get related posts for all posts or for a specific post
+     * Get related posts for a specific post by slug
      * Get related posts
      */
-    async relatedGetRaw(requestParameters: RelatedGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<MainRelatedPost>>> {
+    async relatedGetRaw(requestParameters: RelatedGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RelatedGet200Response>> {
+        if (requestParameters['slug'] == null) {
+            throw new runtime.RequiredError(
+                'slug',
+                'Required parameter "slug" was null or undefined when calling relatedGet().'
+            );
+        }
+
         const queryParameters: any = {};
 
         if (requestParameters['slug'] != null) {
@@ -47,21 +54,24 @@ export class RelatedApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/related`;
+
         const response = await this.request({
-            path: `/related`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(MainRelatedPostFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => RelatedGet200ResponseFromJSON(jsonValue));
     }
 
     /**
-     * Get related posts for all posts or for a specific post
+     * Get related posts for a specific post by slug
      * Get related posts
      */
-    async relatedGet(requestParameters: RelatedGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<MainRelatedPost>> {
+    async relatedGet(requestParameters: RelatedGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<RelatedGet200Response> {
         const response = await this.relatedGetRaw(requestParameters, initOverrides);
         return await response.value();
     }

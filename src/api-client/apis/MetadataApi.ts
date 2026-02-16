@@ -36,8 +36,11 @@ export class MetadataApi extends runtime.BaseAPI {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/meta.json`;
+
         const response = await this.request({
-            path: `/meta.json`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

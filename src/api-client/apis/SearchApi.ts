@@ -14,6 +14,13 @@
 
 
 import * as runtime from '../runtime';
+import type {
+  SearchIndexJsonGet200Response,
+} from '../models/index';
+import {
+    SearchIndexJsonGet200ResponseFromJSON,
+    SearchIndexJsonGet200ResponseToJSON,
+} from '../models/index';
 
 /**
  * 
@@ -24,27 +31,30 @@ export class SearchApi extends runtime.BaseAPI {
      * Get inverted search index for client-side search
      * Get search index
      */
-    async searchInvertedJsonGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<{ [key: string]: Array<string>; }>> {
+    async searchIndexJsonGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SearchIndexJsonGet200Response>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+
+        let urlPath = `/search/index.json`;
+
         const response = await this.request({
-            path: `/search/inverted.json`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse<any>(response);
+        return new runtime.JSONApiResponse(response, (jsonValue) => SearchIndexJsonGet200ResponseFromJSON(jsonValue));
     }
 
     /**
      * Get inverted search index for client-side search
      * Get search index
      */
-    async searchInvertedJsonGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<{ [key: string]: Array<string>; }> {
-        const response = await this.searchInvertedJsonGetRaw(initOverrides);
+    async searchIndexJsonGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SearchIndexJsonGet200Response> {
+        const response = await this.searchIndexJsonGetRaw(initOverrides);
         return await response.value();
     }
 
