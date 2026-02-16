@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import PageHeader from '$lib/components/layout/PageHeader.svelte';
 	import Card from '$lib/components/common/Card.svelte';
 	import StatsCard from '$lib/components/common/StatsCard.svelte';
@@ -50,13 +51,13 @@
 			<p class="mb-6 leading-relaxed text-gray-600">
 				Ready to explore? Use the navigation above to browse our content. You can discover posts by
 				<a
-					href={ROUTES.CATEGORIES}
+					href={resolve(ROUTES.CATEGORIES)}
 					class="font-medium text-indigo-600 transition-colors duration-200 hover:text-indigo-800"
 					>categories</a
 				>
 				or search through
 				<a
-					href={ROUTES.TAGS}
+					href={resolve(ROUTES.TAGS)}
 					class="font-medium text-blue-600 transition-colors duration-200 hover:text-blue-800"
 					>tags</a
 				>

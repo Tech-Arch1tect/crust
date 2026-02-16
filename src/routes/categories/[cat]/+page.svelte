@@ -25,7 +25,7 @@
 
 		{#if posts.data && posts.data.length > 0}
 			<div class="space-y-4">
-				{#each posts.data as post}
+				{#each posts.data as post (post.frontmatter?.slug)}
 					<PostCard {post} />
 				{/each}
 			</div>

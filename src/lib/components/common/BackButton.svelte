@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import Button from './Button.svelte';
+
+	import type { AppTypes } from '$app/types';
+	type Pathname = ReturnType<AppTypes['Pathname']>;
 
 	let { fallbackHref = '/', text = 'Back', useHistory = true, position = 'relative' } = $props();
 
@@ -12,10 +16,10 @@
 			if (document.referrer && document.referrer !== window.location.href) {
 				window.history.back();
 			} else {
-				goto(fallbackHref);
+				goto(resolve(fallbackHref as Pathname));
 			}
 		} else {
-			goto(fallbackHref);
+			goto(resolve(fallbackHref as Pathname));
 		}
 	}
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import StatsCard from '$lib/components/common/StatsCard.svelte';
 	import QuickNav from '$lib/components/layout/QuickNav.svelte';
 	import { ROUTES } from '$lib/utils/constants';
@@ -34,7 +35,7 @@
 
 		<div class="flex flex-col justify-center gap-4 sm:flex-row">
 			<a
-				href={ROUTES.CATEGORIES}
+				href={resolve(ROUTES.CATEGORIES)}
 				class="group inline-flex transform items-center rounded-2xl bg-indigo-600 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:bg-indigo-700 hover:shadow-xl"
 			>
 				Explore Categories
@@ -53,7 +54,7 @@
 				</svg>
 			</a>
 			<a
-				href={ROUTES.TAGS}
+				href={resolve(ROUTES.TAGS)}
 				class="group inline-flex transform items-center rounded-2xl border-2 border-gray-300 px-8 py-4 text-base font-semibold text-gray-700 transition-all duration-200 hover:scale-105 hover:border-gray-400 hover:bg-gray-50"
 			>
 				Browse Tags
@@ -85,7 +86,7 @@
 			<div class="mb-8 flex items-center justify-between">
 				<h2 class="text-3xl font-bold text-gray-900">Latest Posts</h2>
 				<a
-					href="/posts"
+					href={resolve('/posts')}
 					class="font-medium text-indigo-600 transition-colors duration-200 hover:text-indigo-700"
 				>
 					View all posts →
@@ -93,7 +94,7 @@
 			</div>
 
 			<div class="space-y-4">
-				{#each latestPosts.data as post}
+				{#each latestPosts.data as post (post.frontmatter?.slug)}
 					<PostCard {post} />
 				{/each}
 			</div>

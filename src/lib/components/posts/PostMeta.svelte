@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { getCategoryName } from '$lib/utils/category';
 
 	let { author, date, readingTime, category } = $props();
@@ -24,7 +25,7 @@
 				/>
 			</svg>
 			<a
-				href="/categories/{encodeURIComponent(category)}"
+				href={resolve(`/categories/${encodeURIComponent(category)}`)}
 				class="font-medium text-indigo-600 transition-colors duration-200 hover:text-indigo-800"
 			>
 				{categoryName}

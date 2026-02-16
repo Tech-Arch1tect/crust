@@ -34,7 +34,7 @@
 			Previous
 		</Button>
 
-		{#each Array(totalPages) as _, i}
+		{#each { length: totalPages }, i}
 			<Button
 				variant={i + 1 === userCurrentPage ? 'primary' : 'secondary'}
 				size="sm"

@@ -57,7 +57,7 @@
 			{results.length} result{results.length === 1 ? '' : 's'} found
 		</div>
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-			{#each results as post}
+			{#each results as post (post.frontmatter?.slug)}
 				<PostCard {post} />
 			{/each}
 		</div>

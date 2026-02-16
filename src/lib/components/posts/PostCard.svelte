@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import Card from '../common/Card.svelte';
 	import {
 		getPostPreviewAuthor,
@@ -37,7 +38,9 @@
 		<div class="flex items-center gap-2">
 			{#if post?.frontmatter?.category}
 				<a
-					href="/categories/{encodeURIComponent(post?.frontmatter?.category || postCategory)}"
+					href={resolve(
+						`/categories/${encodeURIComponent(post?.frontmatter?.category || postCategory)}`
+					)}
 					class="inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-1 text-xs font-medium text-indigo-800 transition-colors duration-200 hover:bg-indigo-200 hover:text-indigo-900"
 				>
 					{categoryName}
@@ -56,7 +59,7 @@
 		class="mb-2 text-xl leading-tight font-bold text-gray-900 transition-colors duration-200 group-hover:text-indigo-600"
 	>
 		{#if postSlug !== '#'}
-			<a href="/posts/{postSlug}" class="hover:underline">
+			<a href={resolve(`/posts/${postSlug}`)} class="hover:underline">
 				{postTitle}
 			</a>
 		{:else}
@@ -72,9 +75,9 @@
 
 	{#if postTags.length > 0}
 		<div class="mb-3 flex flex-wrap gap-1">
-			{#each postTags as tag}
+			{#each postTags as tag (tag)}
 				<a
-					href="/tags/{encodeURIComponent(tag)}"
+					href={resolve(`/tags/${encodeURIComponent(tag)}`)}
 					class="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-900"
 				>
 					#{tag}
@@ -93,7 +96,7 @@
 		</span>
 		{#if postSlug !== '#'}
 			<a
-				href="/posts/{postSlug}"
+				href={resolve(`/posts/${postSlug}`)}
 				class="inline-flex items-center text-xs font-medium text-indigo-600 transition-colors duration-200 hover:text-indigo-700"
 			>
 				Read more

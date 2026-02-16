@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { getColourClasses, type ColourTheme } from '$lib/utils/colours';
 
 	let {
@@ -31,7 +32,7 @@
 
 {#if href}
 	<a
-		{href}
+		href={resolve(href)}
 		class="{baseClasses} {variantClasses[variant as keyof typeof variantClasses]} {sizeClasses[
 			size as keyof typeof sizeClasses
 		]} {className}"

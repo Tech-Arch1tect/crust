@@ -2,7 +2,7 @@
 	import Button from '../common/Button.svelte';
 	import { getCategoryName } from '$lib/utils/category';
 
-	let { post, category, tags } = $props();
+	let { category, tags } = $props();
 
 	const categoryName = $derived(getCategoryName(category));
 </script>
@@ -17,13 +17,13 @@
 
 	<div class="flex gap-4">
 		{#if category && categoryName !== 'Uncategorised'}
-			<Button href="/categories/{encodeURIComponent(category)}" variant="outline" size="sm">
+			<Button href={`/categories/${encodeURIComponent(category)}`} variant="outline" size="sm">
 				Browse {categoryName}
 			</Button>
 		{/if}
 
 		{#if tags.length > 0}
-			<Button href="/tags/{encodeURIComponent(tags[0])}" variant="outline" size="sm">
+			<Button href={`/tags/${encodeURIComponent(tags[0])}`} variant="outline" size="sm">
 				More #{tags[0]}
 			</Button>
 		{/if}

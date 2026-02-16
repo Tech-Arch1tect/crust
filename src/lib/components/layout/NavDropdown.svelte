@@ -1,5 +1,7 @@
 <script lang="ts">
-	let { items, type, colour = 'indigo' } = $props();
+	import { resolve } from '$app/paths';
+
+	let { items, type } = $props();
 
 	const colourMap = {
 		categories: {
@@ -15,6 +17,9 @@
 	const colours = colourMap[type as keyof typeof colourMap] || colourMap.categories;
 	const label = type === 'categories' ? 'Categories' : 'Tags';
 	const prefix = type === 'tags' ? '#' : '';
+
+	import type { AppTypes } from '$app/types';
+	type Pathname = ReturnType<AppTypes['Pathname']>;
 </script>
 
 <div class="group relative">
@@ -36,9 +41,9 @@
 		class="invisible absolute left-0 z-50 mt-2 w-64 rounded-2xl border border-gray-100 bg-white opacity-0 shadow-xl transition-all duration-300 group-hover:visible group-hover:translate-y-1 group-hover:opacity-100"
 	>
 		<div class="p-2">
-			{#each items as item}
+			{#each items as item (item.name)}
 				<a
-					href="/{type}/{encodeURIComponent(item.name)}"
+					href={resolve(`/${type}/${encodeURIComponent(item.name)}` as Pathname)}
 					class="flex items-center justify-between rounded-xl px-4 py-3 text-sm text-gray-700 transition-all duration-200 {colours.hover}"
 				>
 					<span>{prefix}{item.name}</span>
@@ -49,7 +54,7 @@
 			<div class="my-2 border-t border-gray-100"></div>
 
 			<a
-				href="/{type}"
+				href={resolve(`/${type}` as Pathname)}
 				class="flex items-center justify-center rounded-xl px-4 py-3 text-sm font-medium text-white transition-all duration-200 {colours.button}"
 			>
 				View All {label}

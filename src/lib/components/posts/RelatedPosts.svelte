@@ -10,7 +10,7 @@
 		<h2 class="mb-6 text-2xl font-bold text-gray-900">Related Posts</h2>
 
 		<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-			{#each relatedPosts as related}
+			{#each relatedPosts as related (related.slug)}
 				<Card href="/posts/{related.slug}" variant="compact" class="!p-5">
 					<h3
 						class="mb-2 text-lg leading-tight font-semibold text-gray-900 transition-colors duration-200 group-hover:text-indigo-600"

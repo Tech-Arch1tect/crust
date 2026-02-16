@@ -45,6 +45,6 @@
 
 		<RelatedPosts {relatedPosts} />
 
-		<PostNavigation {post} {category} {tags} />
+		<PostNavigation {category} {tags} />
 	</div>
 </div>

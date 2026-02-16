@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+
 	let { meta } = $props();
 	import { getTopItems } from '$lib/utils/data';
 
@@ -11,9 +13,9 @@
 		<div class="relative overflow-hidden rounded-3xl border border-gray-100 bg-white p-8 shadow-lg">
 			<h2 class="mb-6 text-2xl font-bold text-gray-900">Popular Categories</h2>
 			<div class="space-y-3">
-				{#each topCategories as category}
+				{#each topCategories as category (category.name)}
 					<a
-						href="/categories/{encodeURIComponent(category.name)}"
+						href={resolve(`/categories/${encodeURIComponent(category.name)}`)}
 						class="group flex items-center justify-between rounded-2xl border border-transparent p-4 transition-all duration-200 hover:border-indigo-100 hover:bg-indigo-50"
 					>
 						<span class="font-medium text-gray-700 group-hover:text-gray-900">{category.name}</span>
@@ -26,7 +28,7 @@
 				{/each}
 			</div>
 			<a
-				href="/categories"
+				href={resolve('/categories')}
 				class="group mt-6 inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-800"
 			>
 				View all categories
@@ -51,9 +53,9 @@
 		<div class="relative overflow-hidden rounded-3xl border border-gray-100 bg-white p-8 shadow-lg">
 			<h2 class="mb-6 text-2xl font-bold text-gray-900">Popular Tags</h2>
 			<div class="space-y-3">
-				{#each topTags as tag}
+				{#each topTags as tag (tag.name)}
 					<a
-						href="/tags/{encodeURIComponent(tag.name)}"
+						href={resolve(`/tags/${encodeURIComponent(tag.name)}`)}
 						class="group flex items-center justify-between rounded-2xl border border-transparent p-4 transition-all duration-200 hover:border-blue-100 hover:bg-blue-50"
 					>
 						<span class="font-medium text-gray-700 group-hover:text-gray-900">#{tag.name}</span>
@@ -66,7 +68,7 @@
 				{/each}
 			</div>
 			<a
-				href="/tags"
+				href={resolve('/tags')}
 				class="group mt-6 inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800"
 			>
 				View all tags

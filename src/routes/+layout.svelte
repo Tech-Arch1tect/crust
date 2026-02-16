@@ -1,9 +1,10 @@
 <script lang="ts">
 	import '../app.css';
 	import Navbar from '$lib/components/layout/Navbar.svelte';
+	import type { Snippet } from 'svelte';
 	import type { LayoutData } from './$types';
 
-	let { children, data }: { children: any; data: LayoutData } = $props();
+	let { children, data }: { children: Snippet; data: LayoutData } = $props();
 </script>
 
 <div class="min-h-screen bg-gray-50">

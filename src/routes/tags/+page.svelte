@@ -38,7 +38,7 @@
 		<div class="mb-12">
 			<h2 class="mb-8 text-center text-3xl font-bold text-gray-900">All Tags</h2>
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-				{#each allTags as tag}
+				{#each allTags as tag (tag.name)}
 					<Card href="/tags/{encodeURIComponent(tag.name)}" variant="compact">
 						<div class="mb-3 flex items-center space-x-3">
 							<IconAvatar icon="#" colour="blue" size="sm" />

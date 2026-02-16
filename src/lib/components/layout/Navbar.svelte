@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import NavDropdown from '$lib/components/layout/NavDropdown.svelte';
 	import MobileMenu from '$lib/components/layout/MobileMenu.svelte';
 	import MenuIcon from '$lib/components/layout/MenuIcon.svelte';
@@ -27,7 +28,7 @@
 >
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="flex h-16 items-center justify-between">
-			<a href="/" class="group flex items-center space-x-3">
+			<a href={resolve('/')} class="group flex items-center space-x-3">
 				<div
 					class="flex h-9 w-9 transform items-center justify-center rounded-xl bg-indigo-600 shadow-lg transition-transform duration-200 group-hover:rotate-12"
 				>
@@ -39,9 +40,9 @@
 			</a>
 
 			<div class="hidden items-center space-x-1 md:flex">
-				{#each NAV_ITEMS as item}
+				{#each NAV_ITEMS as item (item.href)}
 					<a
-						href={item.href}
+						href={resolve(item.href)}
 						class="relative rounded-xl px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:text-gray-900"
 						>{item.label}</a
 					>
@@ -55,7 +56,7 @@
 					<NavDropdown items={topTags} type="tags" />
 				{/if}
 
-				<form action="/search" method="GET" class="ml-3 flex items-center">
+				<form action={resolve('/search')} method="GET" class="ml-3 flex items-center">
 					<div class="relative">
 						<svg
 							class="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-gray-400"

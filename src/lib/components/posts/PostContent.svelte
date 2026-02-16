@@ -23,6 +23,7 @@
 		<article
 			class="prose prose-lg prose-gray prose-headings:text-gray-900 prose-a:text-indigo-600 hover:prose-a:text-indigo-700 prose-code:text-indigo-600 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100 max-w-none"
 		>
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 			{@html renderedContent()}
 		</article>
 	{:else}

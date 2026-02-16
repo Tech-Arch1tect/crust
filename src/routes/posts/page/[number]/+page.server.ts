@@ -1,4 +1,4 @@
-import { postsApi, previewsApi } from '$lib/api';
+import { previewsApi } from '$lib/api';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 

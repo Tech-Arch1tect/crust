@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import type { PageData } from './$types';
 	import PageHeader from '$lib/components/layout/PageHeader.svelte';
 	import PostCard from '$lib/components/posts/PostCard.svelte';
@@ -15,9 +16,9 @@
 
 	async function handlePagination(newPage: number) {
 		if (newPage === 1) {
-			await goto('/posts');
+			await goto(resolve('/posts'));
 		} else {
-			await goto(`/posts/page/${newPage}`);
+			await goto(resolve(`/posts/page/${newPage}`));
 		}
 	}
 </script>
@@ -55,7 +56,7 @@
 
 		{#if previewsData.data && previewsData.data.length > 0}
 			<div class="space-y-4">
-				{#each previewsData.data as preview}
+				{#each previewsData.data as preview (preview.frontmatter?.slug)}
 					<PostCard post={preview} />
 				{/each}
 			</div>

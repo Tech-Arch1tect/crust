@@ -32,7 +32,7 @@
 		</div>
 	{:else}
 		<div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-			{#each allCategories as category}
+			{#each allCategories as category (category.name)}
 				<ItemCard
 					name={category.name}
 					count={category.count}
