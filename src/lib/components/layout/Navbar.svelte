@@ -55,6 +55,30 @@
 					<NavDropdown items={topTags} type="tags" />
 				{/if}
 
+				<form action="/search" method="GET" class="ml-3 flex items-center">
+					<div class="relative">
+						<svg
+							class="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-gray-400"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+							/>
+						</svg>
+						<input
+							name="q"
+							type="search"
+							placeholder="Search..."
+							class="w-36 rounded-lg bg-gray-100 py-1.5 pr-3 pl-8 text-sm text-gray-700 transition-all duration-200 placeholder:text-gray-400 focus:w-48 focus:bg-white focus:ring-2 focus:ring-purple-300 focus:outline-none"
+						/>
+					</div>
+				</form>
+
 				{#if meta?.posts?.total}
 					<div
 						class="ml-4 rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-700"

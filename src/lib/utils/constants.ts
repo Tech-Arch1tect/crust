@@ -2,6 +2,7 @@ export const ROUTES = {
 	HOME: '/',
 	CATEGORIES: '/categories',
 	TAGS: '/tags',
+	SEARCH: '/search',
 	ABOUT: '/about'
 } as const;
 
