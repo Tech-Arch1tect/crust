@@ -45,26 +45,26 @@
 		<Card class="mb-8 border-gray-200 bg-gray-50">
 			<div class="flex items-center justify-between text-sm text-gray-600">
 				<div>
-					Showing {previewsData.previews?.length || 0} of {previewsData.totalItems || 0} posts
+					Showing {previewsData.data?.length || 0} of {previewsData.pagination?.totalItems || 0} posts
 				</div>
 				<div>
-					Page {currentUserPage} of {previewsData.totalPages || 1}
+					Page {currentUserPage} of {previewsData.pagination?.totalPages || 1}
 				</div>
 			</div>
 		</Card>
 
-		{#if previewsData.previews && previewsData.previews.length > 0}
+		{#if previewsData.data && previewsData.data.length > 0}
 			<div class="space-y-4">
-				{#each previewsData.previews as preview}
+				{#each previewsData.data as preview}
 					<PostCard post={preview} />
 				{/each}
 			</div>
 
 			<Pagination
-				currentPage={previewsData.page || 0}
-				totalPages={previewsData.totalPages || 1}
-				hasPrevious={previewsData.hasPrevious || false}
-				hasNext={previewsData.hasNext || false}
+				currentPage={previewsData.pagination?.page || 0}
+				totalPages={previewsData.pagination?.totalPages || 1}
+				hasPrevious={previewsData.pagination?.hasPrevious || false}
+				hasNext={previewsData.pagination?.hasNext || false}
 				onPageChange={handlePagination}
 			/>
 		{:else}

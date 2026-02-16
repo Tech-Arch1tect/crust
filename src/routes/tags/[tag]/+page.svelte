@@ -23,9 +23,9 @@
 
 		<PageHeader title={`#${tag}`} description={`Posts tagged with "${tag}"`} colour="blue" />
 
-		{#if posts.length > 0}
+		{#if posts.data && posts.data.length > 0}
 			<div class="space-y-4">
-				{#each posts as post}
+				{#each posts.data as post}
 					<PostCard {post} />
 				{/each}
 			</div>

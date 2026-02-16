@@ -18,7 +18,7 @@ export const load: PageServerLoad = async ({ parent, params }) => {
 		page: apiPage
 	});
 
-	if (previews.totalPages && userPage > previews.totalPages) {
+	if (previews.pagination?.totalPages && userPage > previews.pagination.totalPages) {
 		throw error(404, 'Page not found');
 	}
 

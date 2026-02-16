@@ -80,7 +80,7 @@
 		<StatsCard value={meta?.tags?.total || 0} label="Tags" colour="purple" />
 	</div>
 
-	{#if latestPosts?.previews && Array.isArray(latestPosts.previews) && latestPosts.previews.length > 0}
+	{#if latestPosts?.data && latestPosts.data.length > 0}
 		<section class="mb-16">
 			<div class="mb-8 flex items-center justify-between">
 				<h2 class="text-3xl font-bold text-gray-900">Latest Posts</h2>
@@ -93,7 +93,7 @@
 			</div>
 
 			<div class="space-y-4">
-				{#each latestPosts.previews as post}
+				{#each latestPosts.data as post}
 					<PostCard {post} />
 				{/each}
 			</div>

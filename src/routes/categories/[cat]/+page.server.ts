@@ -1,19 +1,17 @@
 import { categoriesApi } from '$lib/api';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import type { MainPostPreview } from '../../../api-client';
+import type { CategoriesGet200Response } from '../../../api-client';
 
 export const load: PageServerLoad = async ({ parent, params }) => {
 	const { meta } = await parent();
 
-	let postsByCat: MainPostPreview[];
+	let postsByCat: CategoriesGet200Response;
 	const cat = params.cat;
-	// api replaces / with _
-	const catWithSwitchedSlash = cat.replace('/', '_');
 
 	try {
 		postsByCat = await categoriesApi.categoriesGet({
-			category: catWithSwitchedSlash
+			category: cat
 		});
 	} catch (apiError) {
 		console.error(apiError);

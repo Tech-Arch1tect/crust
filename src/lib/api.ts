@@ -7,13 +7,15 @@ import {
 	PreviewsApi,
 	RelatedApi,
 	SearchApi,
-	TagsApi
+	TagsApi,
+	querystring
 } from '../api-client';
 
 const basePath = import.meta.env.VITE_API_BASE_PATH || 'http://localhost:8080/api';
 
 const configuration = new Configuration({
-	basePath: basePath
+	basePath: basePath,
+	queryParamsStringify: (params) => querystring(params).replace(/%2F/gi, '/')
 });
 
 export const api = new BaseAPI(configuration);
