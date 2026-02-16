@@ -4,12 +4,14 @@
 	import PostMeta from '$lib/components/posts/PostMeta.svelte';
 	import TagList from '$lib/components/taxonomy/TagList.svelte';
 	import PostContent from '$lib/components/posts/PostContent.svelte';
+	import RelatedPosts from '$lib/components/posts/RelatedPosts.svelte';
 	import PostNavigation from '$lib/components/posts/PostNavigation.svelte';
 
 	let { data }: { data: PageData } = $props();
 
 	const meta = $derived(data.meta);
 	const post = $derived(data.post);
+	const relatedPosts = $derived(data.relatedPosts);
 	const siteName = $derived(meta?.site?.name || 'My Blog');
 
 	const title = $derived(post?.frontmatter?.title || 'Untitled Post');
@@ -40,6 +42,8 @@
 		{/if}
 
 		<PostContent {markdown} />
+
+		<RelatedPosts {relatedPosts} />
 
 		<PostNavigation {post} {category} {tags} />
 	</div>
