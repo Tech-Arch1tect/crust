@@ -43,6 +43,7 @@
 		]
 	},
 	"dependencies": {
-		"marked": "^17.0.2"
+		"marked": "^17.0.2",
+		"shiki": "^3.22.0"
 	}
 }

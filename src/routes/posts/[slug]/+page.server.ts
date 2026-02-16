@@ -1,4 +1,5 @@
 import { postsApi, relatedApi } from '$lib/api';
+import { renderMarkdown } from '$lib/utils/markdown';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
@@ -17,11 +18,13 @@ export const load: PageServerLoad = async ({ parent, params }) => {
 
 	const post = postResult.value.data;
 	const relatedPosts = relatedResult.status === 'fulfilled' ? (relatedResult.value.data ?? []) : [];
+	const html = await renderMarkdown(post?.markdown || '');
 
 	return {
 		meta,
 		post,
 		relatedPosts,
+		html,
 		pageType: 'post'
 	};
 };

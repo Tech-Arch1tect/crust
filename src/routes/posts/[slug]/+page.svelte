@@ -20,7 +20,7 @@
 	const tags = $derived(post?.frontmatter?.tags || []);
 	const category = $derived(post?.frontmatter?.category);
 	const readingTime = $derived(post?.readingTime ? `${post.readingTime} min read` : 'Quick read');
-	const markdown = $derived(post?.markdown || '');
+	const html = $derived(data.html);
 	const excerpt = $derived(post?.excerpt || '');
 </script>
 
@@ -41,7 +41,7 @@
 			</div>
 		{/if}
 
-		<PostContent {markdown} />
+		<PostContent {html} />
 
 		<RelatedPosts {relatedPosts} />
 

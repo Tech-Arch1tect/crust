@@ -1,30 +1,16 @@
 <script lang="ts">
-	import { marked } from 'marked';
 	import Card from '../common/Card.svelte';
 
-	let { markdown } = $props();
-
-	const renderedContent = $derived(() => {
-		if (!markdown) return '';
-		try {
-			return marked(markdown, {
-				breaks: true,
-				gfm: true
-			});
-		} catch (error) {
-			console.error('Error parsing markdown:', error);
-			return `<pre>${markdown}</pre>`;
-		}
-	});
+	let { html } = $props();
 </script>
 
 <Card>
-	{#if renderedContent()}
+	{#if html}
 		<article
-			class="prose prose-lg prose-gray prose-headings:text-gray-900 prose-a:text-indigo-600 hover:prose-a:text-indigo-700 prose-code:text-indigo-600 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100 max-w-none"
+			class="prose prose-lg prose-gray prose-headings:text-gray-900 prose-a:text-indigo-600 hover:prose-a:text-indigo-700 prose-code:text-indigo-600 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded max-w-none [&_pre]:rounded-lg [&_pre]:border [&_pre]:border-gray-700 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-inherit"
 		>
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-			{@html renderedContent()}
+			{@html html}
 		</article>
 	{:else}
 		<div class="py-12 text-center">
